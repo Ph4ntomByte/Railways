@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kingdom's Railway Network</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Railway Puzzle Game</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="menu" class="screen">
-        <h1>The Kingdom's Railway Network</h1>
-        <label for="player-name">Player Name:</label>
-        <input type="text" id="player-name">
-        <label for="difficulty">Map Difficulty:</label>
-        <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="hard">Hard</option>
-        </select>
-        <button onclick="startGame()">Start Game</button>
-        <button onclick="showDescription()">Game Description</button>
-        <div id="leaderboard" class="hidden">
-            <h2>Leaderboard</h2>
-            <ul id="leaderboard-list"></ul>
-        </div>
-    </div>
+  <div id="menu">
+    <label for="playerName">Name:</label>
+    <input type="text" id="playerName" required>
+    <br>
+    <label for="difficulty">Map Difficulty:</label>
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="hard">Hard</option>
+    </select>
+    <br>
+    <button onclick="startGame()">Start Game</button>
+    <button onclick="showRules()">Show Rules</button>
+    <div id="leaderboard" class="hidden"></div>
+  </div>
 
-    <div id="game" class="screen hidden">
-        <div id="game-grid"></div>
-        <button onclick="returnToMenu()">Back to Menu</button>
-    </div>
+  <div id="game" class="hidden">
+    <h2>Player: <span id="playerDisplay"></span></h2>
+    <div id="timer">0</div>
+    <div id="gameContainer"></div>
+    <button onclick="endGame()">End Game</button>
+  </div>
 
-    <div id="description" class="hidden">
-        <h2>Game Description</h2>
-        <p>Help Trickles create a circular railway through various terrains...</p>
-        <button onclick="hideDescription()">Close</button>
-    </div>
+  <div id="rulesPopup" class="hidden">
+    <h2>Game Rules</h2>
+    <p>Here are the rules of the game...</p>
+    <button onclick="closeRules()">Close</button>
+  </div>
 
-    <script src="js/app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
-
