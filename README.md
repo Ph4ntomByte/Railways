@@ -11,23 +11,23 @@ The most severe consequence of such an offense is the student's expulsion from t
 
 Minimum requirements (8 points)
 
-  - [ ] Mandatory: The readme file provided in the initial submission is properly filled out (Declaration, completed points) (0 points)
-  - [ ] Mandatory: The game was created using an HTML file without using any frameworks. (0 points)
-  - [ ] Mandatory: The solution completely avoids the practices mentioned in the 'bad practice' section. (0 points)
-  - [ ] Menu: The main menu displays the necessary elements: a name input field, a difficulty selection option, and a start button (1 point)
-  - [ ] Menu: Clicking the Start button takes us to the game screen. (1 point)
-  - [ ] Menu: The game rules can be accessed from the menu. (1 point)
-  - [ ] Game screen: The player's name is displayed on the game screen, and the timer starts (1 point)
-  - [ ] Game screen: A randomly selected map corresponding to the chosen difficulty is displayed on the game screen, along with all the necessary elements (3 points)
-  - [ ] Placement: I can place different types of elements on the cells of the map (2 points).
+  - [X] Mandatory: The readme file provided in the initial submission is properly filled out (Declaration, completed points) (0 points)
+  - [X] Mandatory: The game was created using an HTML file without using any frameworks. (0 points)
+  - [X] Mandatory: The solution completely avoids the practices mentioned in the 'bad practice' section. (0 points)
+  - [x] Menu: The main menu displays the necessary elements: a name input field, a difficulty selection option, and a start button (1 point)
+  - [X] Menu: Clicking the Start button takes us to the game screen. (1 point)
+  - [X] Menu: The game rules can be accessed from the menu. (1 point)
+  - [X] Game screen: The player's name is displayed on the game screen, and the timer starts (1 point)
+  - [X] Game screen: A randomly selected map corresponding to the chosen difficulty is displayed on the game screen, along with all the necessary elements (3 points)
+  - [X] Placement: I can place different types of elements on the cells of the map (2 points).
 
 Basic tasks (12 points)
 
-  - [ ] Placement: Elements can be placed according to the rules. (On a bridge, only straight; on a mountain, only at 90°; nothing can be placed on an oasis; any element can be placed on an empty cell) (4 points)
+  - [X] Placement: Elements can be placed according to the rules. (On a bridge, only straight; on a mountain, only at 90°; nothing can be placed on an oasis; any element can be placed on an empty cell) (4 points)
   - [ ] Validation: The game checks whether the puzzle is solved. That is: each cell that can be touched is only touched once; the path is continuous; all cells are accessible from the neighboring cells; and the correct elements are present everywhere (4 points)
   - [ ] End of game: At the end of the game, the time taken to complete the puzzle is displayed. (1 point)
   - [ ] Leaderboard: At the end of the game, a leaderboard is displayed, showing how long it took for different players to complete the puzzle at the given difficulty level (2 points)
-  - [ ] Other: A neat design and well-organized code (1 point)
+  - [X] Other: A neat design and well-organized code (1 point)
 
 Bonus tasks (5 points)
 

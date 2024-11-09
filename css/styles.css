@@ -37,14 +37,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px; /* Add margin to separate from buttons */
+  margin-bottom: 20px; 
 }
 
 #buttonsContainer {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Space between "Show Rules" and "Start Game" buttons */
-  margin-top: -20px; /* Move the buttons up */
+  gap: 15px; 
+  margin-top: -20px; 
 }
 
 #showRulesButton, #startGameButton {
@@ -132,21 +132,6 @@ body {
   cursor: pointer;
 }
 
-.difficultyBox.selected {
-  background: #B4BFA3; 
-  color: #FFFFFF; 
-}
-
-#box5x5 {
-  background: #FFFFFF;
-  color: #B4BFA3;
-}
-
-#box7x7 {
-  background: #EAEFD3;
-  color: #505168;
-}
-
 .difficultyLabel {
   font-weight: 800;
   font-size: 20px;
@@ -161,6 +146,12 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
+  background-color: #505168; 
+  color: white; 
+}
+
+button:hover {
+  background-color: #404058;
 }
 
 .hidden {
@@ -171,6 +162,15 @@ button {
   display: grid;
   gap: 2px;
   margin-top: 20px;
+  border: 3px solid #B4BFA3; 
+  padding: 10px; 
+  border-radius: 10px;
+}
+#timer {
+  font-size: 20px;
+  font-weight: bold;
+  color: #505168;
+  margin-bottom: 10px;
 }
 
 .row {

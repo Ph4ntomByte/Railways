@@ -1,6 +1,6 @@
 let timer, elapsedTime = 0, selectedMap, playerName;
 let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-let selectedDifficulty = 'easy';
+let selectedDifficulty = 'null';
 const images = {};
 
 function preloadImages() {
@@ -53,12 +53,18 @@ initialize();
 
 function selectDifficulty(difficulty) {
   selectedDifficulty = difficulty;
-  document.querySelector('#box5x5').style.background = difficulty === 'easy' ? '#FFFFFF' : '#EAEFD3';
-  document.querySelector('#box5x5').style.color = difficulty === 'easy' ? '#B4BFA3' : '#505168';
-  document.querySelector('#box7x7').style.background = difficulty === 'hard' ? '#FFFFFF' : '#EAEFD3';
-  document.querySelector('#box7x7').style.color = difficulty === 'hard' ? '#B4BFA3' : '#505168';
+  if (difficulty === 'easy') {
+    document.querySelector('#box5x5').style.background = '#B4BFA3';
+    document.querySelector('#box5x5').style.color = '#FFFFFF';
+    document.querySelector('#box7x7').style.background = '#FFFFFF';
+    document.querySelector('#box7x7').style.color = '#B4BFA3';
+  } else {
+    document.querySelector('#box5x5').style.background = '#FFFFFF';
+    document.querySelector('#box5x5').style.color = '#B4BFA3';
+    document.querySelector('#box7x7').style.background = '#B4BFA3';
+    document.querySelector('#box7x7').style.color = '#FFFFFF';
 }
-
+}
 function startGame() {
   playerName = document.querySelector('#playerName').value;
   const difficulty = selectedDifficulty;
@@ -103,86 +109,54 @@ function chooseMap(difficulty) {
   const maps = {
     easy: [
       [
-        ['empty', 'mountain', 'empty', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'bridge', 'oasis'],
-        ['bridge', 'empty', 'mountain', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'oasis', 'empty'],
-        ['empty', 'empty', 'mountain', 'empty', 'empty']
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 180 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }]
       ],
       [
-        ['empty', 'empty', 'empty', 'mountain', 'oasis'],
-        ['empty', 'bridge', 'empty', 'empty', 'oasis'],
-        ['mountain', 'empty', 'bridge', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'oasis', 'empty'],
-        ['empty', 'mountain', 'empty', 'empty', 'empty']
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'mountain', rotation: 180 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }]
       ],
       [
-        ['oasis', 'empty', 'empty', 'mountain', 'empty'],
-        ['empty', 'bridge', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'mountain', 'empty', 'bridge'],
-        ['empty', 'oasis', 'empty', 'empty', 'empty'],
-        ['mountain', 'empty', 'empty', 'empty', 'empty']
-      ],
-      [
-        ['empty', 'empty', 'mountain', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'bridge', 'empty'],
-        ['mountain', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'oasis', 'empty', 'empty', 'bridge'],
-        ['empty', 'empty', 'mountain', 'empty', 'empty']
-      ],
-      [
-        ['empty', 'mountain', 'empty', 'empty', 'oasis'],
-        ['empty', 'empty', 'bridge', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'mountain', 'empty'],
-        ['bridge', 'empty', 'empty', 'oasis', 'empty'],
-        ['empty', 'mountain', 'empty', 'empty', 'empty']
+        [{ type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 180 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'mountain', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }]
       ]
     ],
     hard: [
       [
-        ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
-        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
-        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+        [{ type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 0 }, { type: 'oasis', rotation: 0 }, { type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'mountain', rotation: 180 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }]
       ],
       [
-        ['empty', 'empty', 'mountain', 'oasis', 'empty', 'bridge', 'empty'],
-        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'mountain', 'empty', 'mountain', 'empty', 'empty', 'empty'],
-        ['mountain', 'empty', 'empty', 'empty', 'bridge', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 90 }, { type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 180 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'mountain', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }]
       ],
       [
-        ['empty', 'mountain', 'oasis', 'empty', 'empty', 'bridge', 'empty'],
-        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
-        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
-      ],
-      [
-        ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
-        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
-        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
-      ],
-      [
-        ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
-        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
-        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+        [{ type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 0 }, { type: 'oasis', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'mountain', rotation: 180 }, { type: 'empty', rotation: 0 }, { type: 'mountain', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 90 }, { type: 'empty', rotation: 0 }, { type: 'oasis', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }],
+        [{ type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'bridge', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }, { type: 'empty', rotation: 0 }]
       ]
     ]
   };
@@ -190,18 +164,43 @@ function chooseMap(difficulty) {
   return maps[difficulty][randomIndex];
 }
 
+
 const railTypes = ['straight_rail', 'curve_rail'];
 
-let isDrawing = false; 
+let isDrawing = false;
+let startX, startY, lastDirection;
 
 function handleMouseDown(cellDiv) {
   isDrawing = true;
-  placeRail(cellDiv);
+  startX = event.clientX;
+  startY = event.clientY;
+  lastDirection = null;
+  placeRail(cellDiv, 'start');
 }
 
 function handleMouseOver(cellDiv) {
   if (isDrawing) {
-    placeRail(cellDiv);
+    const currentX = event.clientX;
+    const currentY = event.clientY;
+    const deltaX = currentX - startX;
+    const deltaY = currentY - startY;
+
+    let direction;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      direction = deltaX > 0 ? 'east' : 'west';
+    } else {
+      direction = deltaY > 0 ? 'south' : 'north';
+    }
+
+    if (lastDirection && lastDirection !== direction) {
+      placeRailWithMouse(cellDiv, direction, true);
+    } else {
+      placeRailWithMouse(cellDiv, direction, false);
+    }
+
+    lastDirection = direction;
+    startX = currentX;
+    startY = currentY;
   }
 }
 
@@ -219,11 +218,12 @@ function renderGrid(map) {
     row.forEach(cell => {
       const cellDiv = document.createElement('div');
       cellDiv.classList.add('cell');
-      cellDiv.style.backgroundImage = `url(${images[cell].src})`;
+      cellDiv.style.backgroundImage = `url(${images[cell.type].src})`;
       cellDiv.style.backgroundSize = 'cover';
-      cellDiv.dataset.type = cell;
+      cellDiv.dataset.type = cell.type;
       cellDiv.dataset.railType = ''; 
-      cellDiv.dataset.direction = '0'; 
+      cellDiv.dataset.direction = cell.rotation; 
+      cellDiv.style.transform = `rotate(${cell.rotation}deg)`;
       
       cellDiv.addEventListener('mousedown', () => handleMouseDown(cellDiv));
       cellDiv.addEventListener('mouseover', () => handleMouseOver(cellDiv));
@@ -243,6 +243,8 @@ function renderGrid(map) {
 
 function placeRail(cellDiv) {
   const type = cellDiv.dataset.type;
+  const direction = parseInt(cellDiv.dataset.direction);
+
   if (type === 'oasis') {
     return;
   }
@@ -266,6 +268,7 @@ function placeRail(cellDiv) {
   } else if (type === 'mountain' && !cellDiv.dataset.railType) {
     cellDiv.dataset.railType = 'mountain_rail';
     cellDiv.style.backgroundImage = `url(${images['mountain_rail'].src})`;
+    cellDiv.style.transform = `rotate(${direction}deg)`;
   }
 }
 
@@ -312,8 +315,83 @@ function validatePuzzle() {
 }
 
 function isContinuousLoop(grid) {
+  const rowLength = Math.sqrt(grid.length);
   const visited = new Set();
   const stack = [];
+
+  function getNeighbors(index) {
+    const neighbors = [];
+    const row = Math.floor(index / rowLength);
+    const col = index % rowLength;
+    const cell = grid[index];
+
+    if (!cell.railType) return neighbors;
+
+    const direction = parseInt(cell.direction);
+    const connections = getConnections(cell.railType, direction);
+
+    if (connections.includes('north') && row > 0 && grid[index - rowLength].railType) {
+      const neighbor = grid[index - rowLength];
+      const neighborConnections = getConnections(neighbor.railType, parseInt(neighbor.direction));
+      if (neighborConnections.includes('south')) {
+        neighbors.push(index - rowLength);
+      }
+    }
+    if (connections.includes('south') && row < rowLength - 1 && grid[index + rowLength].railType) {
+      const neighbor = grid[index + rowLength];
+      const neighborConnections = getConnections(neighbor.railType, parseInt(neighbor.direction));
+      if (neighborConnections.includes('north')) {
+        neighbors.push(index + rowLength);
+      }
+    }
+    if (connections.includes('west') && col > 0 && grid[index - 1].railType) {
+      const neighbor = grid[index - 1];
+      const neighborConnections = getConnections(neighbor.railType, parseInt(neighbor.direction));
+      if (neighborConnections.includes('east')) {
+        neighbors.push(index - 1);
+      }
+    }
+    if (connections.includes('east') && col < rowLength - 1 && grid[index + 1].railType) {
+      const neighbor = grid[index + 1];
+      const neighborConnections = getConnections(neighbor.railType, parseInt(neighbor.direction));
+      if (neighborConnections.includes('west')) {
+        neighbors.push(index + 1);
+      }
+    }
+
+    return neighbors;
+  }
+
+  function getConnections(railType, direction) {
+    const connections = {
+      straight_rail: {
+        0: ['north', 'south'],
+        90: ['west', 'east'],
+        180: ['north', 'south'],
+        270: ['west', 'east']
+      },
+      curve_rail: {
+        0: ['north', 'east'],
+        90: ['east', 'south'],
+        180: ['south', 'west'],
+        270: ['west', 'north']
+      },
+      bridge_rail: {
+        0: ['north', 'south'],
+        90: ['west', 'east'],
+        180: ['north', 'south'],
+        270: ['west', 'east']
+      },
+      mountain_rail: {
+        0: ['south', 'east'],
+        90: ['east', 'north'],
+        180: ['north', 'west'],
+        270: ['west', 'south']
+      }
+    };
+
+    return connections[railType][direction];
+  }
 
   for (let i = 0; i < grid.length; i++) {
     if (grid[i].railType) {
@@ -324,13 +402,13 @@ function isContinuousLoop(grid) {
 
   while (stack.length > 0) {
     const current = stack.pop();
-    if (visited.has(current)) continue;
-    visited.add(current);
-
-    const neighbors = getNeighbors(current, grid);
-    for (const neighbor of neighbors) {
-      if (!visited.has(neighbor)) {
-        stack.push(neighbor);
+    if (!visited.has(current)) {
+      visited.add(current);
+      const neighbors = getNeighbors(current);
+      for (const neighbor of neighbors) {
+        if (!visited.has(neighbor)) {
+          stack.push(neighbor);
+        }
       }
     }
   }
@@ -343,28 +421,6 @@ function isContinuousLoop(grid) {
 
   return true;
 }
-
-// function getNeighbors(index, grid) {
-//   const neighbors = [];
-//   const rowLength = Math.sqrt(grid.length);
-//   const row = Math.floor(index / rowLength);
-//   const col = index % rowLength;
-
-//   if (row > 0 && grid[index - rowLength].railType) {
-//     neighbors.push(index - rowLength);
-//   }
-//   if (row < rowLength - 1 && grid[index + rowLength].railType) {
-//     neighbors.push(index + rowLength);
-//   }
-//   if (col > 0 && grid[index - 1].railType) {
-//     neighbors.push(index - 1);
-//   }
-//   if (col < rowLength - 1 && grid[index + 1].railType) {
-//     neighbors.push(index + 1);
-//   }
-
-//   return neighbors;
-// }
 
 function updateLeaderboard(playerName, time, difficulty) {
   const leaderboardKey = `leaderboard_${difficulty}`;
@@ -393,7 +449,7 @@ function endGame() {
     updateLeaderboard(playerName, elapsedTime, selectedDifficulty);
     displayLeaderboard(leaderboard);
     document.querySelector('#game').style.display = 'none';
-    document.querySelector('#menu').style.display = 'block';
+    document.querySelector('#leaderboardPopup').style.display = 'block'; 
   } else {
     console.log('The puzzle is not solved correctly. Please try again.');
     document.querySelector('#incompleteGamePopup').style.display = 'block';
@@ -407,5 +463,6 @@ function restartGame() {
   document.querySelector('#menu').style.display = 'block';
   document.querySelector('#box5x5').classList.remove('selected');
   document.querySelector('#box7x7').classList.remove('selected');
+  startGameButton.classList.remove('active');
   selectedDifficulty = easy;
 }
