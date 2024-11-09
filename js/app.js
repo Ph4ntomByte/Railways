@@ -102,23 +102,92 @@ function stopTimer() {
 function chooseMap(difficulty) {
   const maps = {
     easy: [
-      ['empty', 'mountain', 'empty', 'empty', 'oasis'],
-      ['empty', 'empty', 'empty', 'bridge', 'oasis'],
-      ['bridge', 'empty', 'mountain', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'oasis', 'empty'],
-      ['empty', 'empty', 'mountain', 'empty', 'empty']
+      [
+        ['empty', 'mountain', 'empty', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'bridge', 'oasis'],
+        ['bridge', 'empty', 'mountain', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'oasis', 'empty'],
+        ['empty', 'empty', 'mountain', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'empty', 'empty', 'mountain', 'oasis'],
+        ['empty', 'bridge', 'empty', 'empty', 'oasis'],
+        ['mountain', 'empty', 'bridge', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'oasis', 'empty'],
+        ['empty', 'mountain', 'empty', 'empty', 'empty']
+      ],
+      [
+        ['oasis', 'empty', 'empty', 'mountain', 'empty'],
+        ['empty', 'bridge', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'mountain', 'empty', 'bridge'],
+        ['empty', 'oasis', 'empty', 'empty', 'empty'],
+        ['mountain', 'empty', 'empty', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'empty', 'mountain', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'bridge', 'empty'],
+        ['mountain', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'oasis', 'empty', 'empty', 'bridge'],
+        ['empty', 'empty', 'mountain', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'mountain', 'empty', 'empty', 'oasis'],
+        ['empty', 'empty', 'bridge', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'mountain', 'empty'],
+        ['bridge', 'empty', 'empty', 'oasis', 'empty'],
+        ['empty', 'mountain', 'empty', 'empty', 'empty']
+      ]
     ],
     hard: [
-      ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
-      ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
-      ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+      [
+        ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
+        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
+        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'empty', 'mountain', 'oasis', 'empty', 'bridge', 'empty'],
+        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'mountain', 'empty', 'mountain', 'empty', 'empty', 'empty'],
+        ['mountain', 'empty', 'empty', 'empty', 'bridge', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'mountain', 'oasis', 'empty', 'empty', 'bridge', 'empty'],
+        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
+        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
+        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
+        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+      ],
+      [
+        ['empty', 'mountain', 'oasis', 'oasis', 'empty', 'bridge', 'empty'],
+        ['bridge', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'bridge', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'mountain', 'empty', 'empty', 'empty'],
+        ['mountain', 'empty', 'mountain', 'empty', 'bridge', 'empty', 'oasis'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'bridge', 'empty', 'empty', 'empty']
+      ]
     ]
   };
-  return maps[difficulty];
+  const randomIndex = Math.floor(Math.random() * maps[difficulty].length);
+  return maps[difficulty][randomIndex];
 }
 
 const railTypes = ['straight_rail', 'curve_rail'];
@@ -275,27 +344,27 @@ function isContinuousLoop(grid) {
   return true;
 }
 
-function getNeighbors(index, grid) {
-  const neighbors = [];
-  const rowLength = Math.sqrt(grid.length);
-  const row = Math.floor(index / rowLength);
-  const col = index % rowLength;
+// function getNeighbors(index, grid) {
+//   const neighbors = [];
+//   const rowLength = Math.sqrt(grid.length);
+//   const row = Math.floor(index / rowLength);
+//   const col = index % rowLength;
 
-  if (row > 0 && grid[index - rowLength].railType) {
-    neighbors.push(index - rowLength);
-  }
-  if (row < rowLength - 1 && grid[index + rowLength].railType) {
-    neighbors.push(index + rowLength);
-  }
-  if (col > 0 && grid[index - 1].railType) {
-    neighbors.push(index - 1);
-  }
-  if (col < rowLength - 1 && grid[index + 1].railType) {
-    neighbors.push(index + 1);
-  }
+//   if (row > 0 && grid[index - rowLength].railType) {
+//     neighbors.push(index - rowLength);
+//   }
+//   if (row < rowLength - 1 && grid[index + rowLength].railType) {
+//     neighbors.push(index + rowLength);
+//   }
+//   if (col > 0 && grid[index - 1].railType) {
+//     neighbors.push(index - 1);
+//   }
+//   if (col < rowLength - 1 && grid[index + 1].railType) {
+//     neighbors.push(index + 1);
+//   }
 
-  return neighbors;
-}
+//   return neighbors;
+// }
 
 function updateLeaderboard(playerName, time, difficulty) {
   const leaderboardKey = `leaderboard_${difficulty}`;
@@ -308,7 +377,7 @@ function updateLeaderboard(playerName, time, difficulty) {
 
 function displayLeaderboard(leaderboard) {
   const leaderboardDiv = document.querySelector('#leaderboard');
-  leaderboardDiv.innerHTML = '<h2>Leaderboard</h2>';
+  leaderboardDiv.innerHTML = '';
   leaderboard.forEach(entry => {
     const entryDiv = document.createElement('div');
     entryDiv.innerText = `${entry.playerName}: ${entry.time} seconds`;
@@ -338,5 +407,5 @@ function restartGame() {
   document.querySelector('#menu').style.display = 'block';
   document.querySelector('#box5x5').classList.remove('selected');
   document.querySelector('#box7x7').classList.remove('selected');
-  selectedDifficulty = null;
+  selectedDifficulty = easy;
 }
