@@ -1,5 +1,5 @@
-<Student's Name>
-<Neptun Code>
+<Rauf Suleymanov>
+<CVDJB8>
 Web Programming - Assessment
 This solution was submitted and created by the student mentioned above for the Web Programming course assessment.
 I declare that this solution is my own work. I have not copied or used solutions from third parties.
