@@ -1,7 +1,11 @@
 let timer, elapsedTime = 0, selectedMap, playerName;
 let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
 let selectedDifficulty = 'null';
+let isDrawing = false;
+let startX, startY, lastDirection;
 const images = {};
+const railTypes = ['straight_rail', 'curve_rail'];
+document.addEventListener('mouseup', handleMouseUp);
 
 function preloadImages() {
   const imageNames = {
@@ -28,19 +32,37 @@ function initialize() {
 
   document.querySelector('#easyOption').addEventListener('click', () => selectDifficulty('easy'));
   document.querySelector('#hardOption').addEventListener('click', () => selectDifficulty('hard'));
-  document.querySelector('#startGameButton').addEventListener('click', startGame);
+  document.querySelector('#startGameButton').addEventListener('click', (event) => {
+    if (!playerName || playerName.trim() === '' || selectedDifficulty === 'null') {
+      event.preventDefault();
+      const errorMessage = document.querySelector('#errorMessage');
+      if (errorMessage) {
+        errorMessage.style.display = 'block';
+      }
+    } else {
+      const errorMessage = document.querySelector('#errorMessage');
+      if (errorMessage) {
+        errorMessage.style.display = 'none';
+      }
+      startGame();
+    }
+  });
   document.querySelector('#showRulesButton').addEventListener('click', showRules);
   document.querySelector('#closeRulesButton').addEventListener('click', closeRules);
   document.querySelector('#restartGameButton').addEventListener('click', restartGame);
   document.querySelector('#endGameButton').addEventListener('click', endGame);
+  
+  const playerNameInput = document.querySelector('#playerName');
+  const startGameButton = document.querySelector('#startGameButton');
 
-  document.querySelector('#playerName').addEventListener('input', () => {
-    const playerName = document.querySelector('#playerName').value;
-    const startGameButton = document.querySelector('#startGameButton');
+  playerNameInput.addEventListener('input', () => {
+    playerName = playerNameInput.value;
     if (playerName.trim() !== '') {
       startGameButton.classList.add('active');
+      startGameButton.disabled = false;
     } else {
       startGameButton.classList.remove('active');
+      startGameButton.disabled = true;
     }
   });
 
@@ -53,28 +75,28 @@ initialize();
 
 function selectDifficulty(difficulty) {
   selectedDifficulty = difficulty;
+  const box5x5 = document.querySelector('#box5x5');
+  const box7x7 = document.querySelector('#box7x7');
+
   if (difficulty === 'easy') {
-    document.querySelector('#box5x5').style.background = '#B4BFA3';
-    document.querySelector('#box5x5').style.color = '#FFFFFF';
-    document.querySelector('#box7x7').style.background = '#FFFFFF';
-    document.querySelector('#box7x7').style.color = '#B4BFA3';
+    box5x5.classList.add('selected');
+    box5x5.classList.remove('unselected');
+    box7x7.classList.add('unselected');
+    box7x7.classList.remove('selected');
   } else {
-    document.querySelector('#box5x5').style.background = '#FFFFFF';
-    document.querySelector('#box5x5').style.color = '#B4BFA3';
-    document.querySelector('#box7x7').style.background = '#B4BFA3';
-    document.querySelector('#box7x7').style.color = '#FFFFFF';
+    box5x5.classList.add('unselected');
+    box5x5.classList.remove('selected');
+    box7x7.classList.add('selected');
+    box7x7.classList.remove('unselected');
+  }
 }
-}
+
 function startGame() {
   playerName = document.querySelector('#playerName').value;
   const difficulty = selectedDifficulty;
   document.querySelector('#playerDisplay').innerText = playerName;
 
   selectedMap = chooseMap(difficulty);
-  if (!selectedMap) {
-    console.error('No map found for the selected difficulty');
-    return;
-  }
 
   renderGrid(selectedMap);
 
@@ -164,50 +186,6 @@ function chooseMap(difficulty) {
   return maps[difficulty][randomIndex];
 }
 
-
-const railTypes = ['straight_rail', 'curve_rail'];
-
-let isDrawing = false;
-let startX, startY, lastDirection;
-
-function handleMouseDown(cellDiv) {
-  isDrawing = true;
-  startX = event.clientX;
-  startY = event.clientY;
-  lastDirection = null;
-  placeRail(cellDiv, 'start');
-}
-
-function handleMouseOver(cellDiv) {
-  if (isDrawing) {
-    const currentX = event.clientX;
-    const currentY = event.clientY;
-    const deltaX = currentX - startX;
-    const deltaY = currentY - startY;
-
-    let direction;
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      direction = deltaX > 0 ? 'east' : 'west';
-    } else {
-      direction = deltaY > 0 ? 'south' : 'north';
-    }
-
-    if (lastDirection && lastDirection !== direction) {
-      placeRailWithMouse(cellDiv, direction, true);
-    } else {
-      placeRailWithMouse(cellDiv, direction, false);
-    }
-
-    lastDirection = direction;
-    startX = currentX;
-    startY = currentY;
-  }
-}
-
-function handleMouseUp() {
-  isDrawing = false;
-}
-
 function renderGrid(map) {
   const gameContainer = document.querySelector('#gameContainer');
   gameContainer.innerHTML = '';
@@ -278,6 +256,88 @@ function removeRail(cellDiv) {
     cellDiv.dataset.railType = '';
     cellDiv.style.backgroundImage = `url(${images[type].src})`;
     cellDiv.style.transform = 'rotate(0deg)';
+  }
+}
+
+function handleMouseDown(cellDiv) {
+  isDrawing = true;
+  startX = event.clientX;
+  startY = event.clientY;
+  lastDirection = null;
+  placeRail(cellDiv, 'start');
+}
+
+function handleMouseOver(cellDiv) {
+  if (isDrawing) {
+    const currentX = event.clientX;
+    const currentY = event.clientY;
+    const deltaX = currentX - startX;
+    const deltaY = currentY - startY;
+
+    let direction;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      direction = deltaX > 0 ? 'east' : 'west';
+    } else {
+      direction = deltaY > 0 ? 'south' : 'north';
+    }
+
+    if (lastDirection && lastDirection !== direction) {
+      placeRailWithMouse(cellDiv, direction, true);
+    } else {
+      placeRailWithMouse(cellDiv, direction, false);
+    }
+
+    lastDirection = direction;
+    startX = currentX;
+    startY = currentY;
+  }
+}
+
+function handleMouseUp() {
+  isDrawing = false;
+}
+function placeRailWithMouse(cellDiv, direction, isTurn) {
+  const type = cellDiv.dataset.type;
+  const currentRailType = cellDiv.dataset.railType;
+
+  if (type === 'oasis') {
+    return;
+  }
+
+  if (type === 'empty') {
+    let nextRailType;
+    let nextDirection;
+
+    if (direction === 'start') {
+      nextRailType = 'straight_rail';
+      nextDirection = 0;
+    } else if (isTurn) {
+      nextRailType = 'curve_rail';
+      if (direction === 'east') {
+        nextDirection = lastDirection === 'north' ? 90 : 0;
+      } else if (direction === 'west') {
+        nextDirection = lastDirection === 'north' ? 270 : 180;
+      } else if (direction === 'north') {
+        nextDirection = lastDirection === 'east' ? 270 : 0;
+      } else if (direction === 'south') {
+        nextDirection = lastDirection === 'east' ? 90 : 180;
+      }
+    } else {
+      nextRailType = 'straight_rail';
+      nextDirection = direction === 'east' || direction === 'west' ? 90 : 0;
+    }
+
+    cellDiv.dataset.railType = nextRailType;
+    cellDiv.style.backgroundImage = `url(${images[nextRailType].src})`;
+    cellDiv.dataset.direction = nextDirection;
+    cellDiv.style.transform = `rotate(${nextDirection}deg)`;
+  } else if (type === 'bridge' && !currentRailType) {
+    cellDiv.dataset.railType = 'bridge_rail';
+    cellDiv.style.backgroundImage = `url(${images['bridge_rail'].src})`;
+  } else if (type === 'mountain' && !currentRailType) {
+    cellDiv.dataset.railType = 'mountain_rail';
+    cellDiv.style.backgroundImage = `url(${images['mountain_rail'].src})`;
+    cellDiv.style.transform = `rotate(${direction}deg)`;
   }
 }
 
@@ -442,6 +502,18 @@ function displayLeaderboard(leaderboard) {
   leaderboardDiv.classList.remove('hidden');
 }
 
+function restartGame() {
+  stopTimer();
+  document.querySelector('#playerName').value = '';
+  document.querySelector('#game').style.display = 'none';
+  document.querySelector('#menu').style.display = 'block';
+  document.querySelector('#box5x5').classList.remove('selected');
+  document.querySelector('#box7x7').classList.remove('selected');
+  document.querySelector('#startGameButton').classList.remove('active');
+  selectedDifficulty = 'null';
+  document.querySelector('#incompleteGamePopup').style.display = 'none';
+}
+
 function endGame() {
   stopTimer();
   const isValid = validatePuzzle();
@@ -454,15 +526,4 @@ function endGame() {
     console.log('The puzzle is not solved correctly. Please try again.');
     document.querySelector('#incompleteGamePopup').style.display = 'block';
   }
-}
-
-function restartGame() {
-  stopTimer();
-  document.querySelector('#playerName').value = '';
-  document.querySelector('#game').style.display = 'none';
-  document.querySelector('#menu').style.display = 'block';
-  document.querySelector('#box5x5').classList.remove('selected');
-  document.querySelector('#box7x7').classList.remove('selected');
-  startGameButton.classList.remove('active');
-  selectedDifficulty = easy;
 }

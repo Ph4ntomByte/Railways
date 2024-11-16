@@ -139,6 +139,15 @@ body {
   color: #B4BFA3;
 }
 
+.selected {
+  background: #B4BFA3;
+  color: #FFFFFF;
+}
+
+.unselected {
+  background: #FFFFFF;
+  color: #B4BFA3;
+}
 button {
   font-size: 20px;
   padding: 10px 20px;
