@@ -33,17 +33,10 @@ function initialize() {
   document.querySelector('#easyOption').addEventListener('click', () => selectDifficulty('easy'));
   document.querySelector('#hardOption').addEventListener('click', () => selectDifficulty('hard'));
   document.querySelector('#startGameButton').addEventListener('click', (event) => {
-    if (!playerName || playerName.trim() === '' || selectedDifficulty === 'null') {
+    if (!playerName || playerName.trim() === '') {
       event.preventDefault();
-      const errorMessage = document.querySelector('#errorMessage');
-      if (errorMessage) {
-        errorMessage.style.display = 'block';
-      }
+      alert('Please enter your name to start the game.');
     } else {
-      const errorMessage = document.querySelector('#errorMessage');
-      if (errorMessage) {
-        errorMessage.style.display = 'none';
-      }
       startGame();
     }
   });
@@ -70,6 +63,7 @@ function initialize() {
     document.querySelector('#incompleteGamePopup').style.display = 'none';
   });
 }
+
 
 initialize();
 
