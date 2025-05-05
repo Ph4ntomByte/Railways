@@ -1,38 +1,105 @@
-![example.png](/pics/railway-gameplay.png)
+# Railway Puzzle Game
 
-<Rauf Suleymanov>
-<CVDJB8>
-Web Programming - Assessment
-This solution was submitted and created by the student mentioned above for the Web Programming course assessment.
-I declare that this solution is my own work. I have not copied or used solutions from third parties.
-I have not forwarded my solution to fellow students, and I have not made it public.
-The Student Requirements System of Eötvös Loránd University
-(ELTE Organizational and Operational Regulations, Vol. II, §74/C) states that as long as a student presents
-the work of another student - or at least a significant part of it - as their own, it is considered a disciplinary offense.
-The most severe consequence of such an offense is the student's expulsion from the university.
+A browser-based tile-connection puzzle game built with **HTML**, **CSS**, and **JavaScript**—no frameworks required.  
+Arrange straight, curved, or switchable track segments on a grid so that every cell is connected by a single continuous railway.
 
-Minimum requirements (8 points)
+![Gameplay example](/pics/railway-gameplay.png)
 
-  - [X] Mandatory: The readme file provided in the initial submission is properly filled out (Declaration, completed points) (0 points)
-  - [X] Mandatory: The game was created using an HTML file without using any frameworks. (0 points)
-  - [X] Mandatory: The solution completely avoids the practices mentioned in the 'bad practice' section. (0 points)
-  - [x] Menu: The main menu displays the necessary elements: a name input field, a difficulty selection option, and a start button (1 point)
-  - [X] Menu: Clicking the Start button takes us to the game screen. (1 point)
-  - [X] Menu: The game rules can be accessed from the menu. (1 point)
-  - [X] Game screen: The player's name is displayed on the game screen, and the timer starts (1 point)
-  - [X] Game screen: A randomly selected map corresponding to the chosen difficulty is displayed on the game screen, along with all the necessary elements (3 points)
-  - [X] Placement: I can place different types of elements on the cells of the map (2 points).
+---
 
-Basic tasks (12 points)
+## 📄 Declaration
 
-  - [X] Placement: Elements can be placed according to the rules. (On a bridge, only straight; on a mountain, only at 90°; nothing can be placed on an oasis; any element can be placed on an empty cell) (4 points)
-  - [X] Validation: The game checks whether the puzzle is solved. That is: each cell that can be touched is only touched once; the path is continuous; all cells are accessible from the neighboring cells; and the correct elements are present everywhere (4 points)
-  - [X] End of game: At the end of the game, the time taken to complete the puzzle is displayed. (1 point)
-  - [X] Leaderboard: At the end of the game, a leaderboard is displayed, showing how long it took for different players to complete the puzzle at the given difficulty level (2 points)
-  - [X] Other: A neat design and well-organized code (1 point)
+**Student:** Rauf Suleymanov  
+**Course:** Web Programming - Assessment (CVDJB8)  
+**Institution:** Eötvös Loránd University  
+I declare this work is my own and has not been shared or copied. Violation of ELTE regulations (§74/C) may result in expulsion.
 
-Bonus tasks (5 points)
+---
 
-  - [X] Save: The game's state can be saved during gameplay, and upon reopening the page, the last saved state can be loaded (1 point)
-  - [X] Save: Leaderboards are saved in LocalStorage, and are accessible even after reloading the page (2 points)
-  - [X] Element placement: Drawing the path by holding down the mouse button and moving across the cells (2 points)
+## 🏆 Completed Requirements
+
+### Mandatory (8 points)
+- ✔️ Plain HTML file, no frameworks  
+- ✔️ Avoids all 'bad practices'  
+- ✔️ Readme properly filled  
+- ✔️ Menu with name field, difficulty select, Start button  
+- ✔️ Start navigates to game screen  
+- ✔️ Rules accessible from menu  
+- ✔️ Player name displayed & timer starts  
+- ✔️ Random map per difficulty loads with all UI elements  
+
+### Basic Tasks (12 points)
+- ✔️ Place elements per rules (straight on bridge, 90° on mountain, none on oasis)  
+- ✔️ Automatic puzzle validation (continuous path, no cell touched twice, correct elements)  
+- ✔️ Display completion time  
+- ✔️ Leaderboard per difficulty (saved in LocalStorage)  
+- ✔️ Clean design & organized code  
+
+### Bonus (5 points)
+- ✔️ Save & restore game state  
+- ✔️ Persistent leaderboards in LocalStorage  
+- ✔️ Drag-to-place path drawing  
+
+---
+
+## 🎮 How to Play
+
+1. **Run** run live server.
+2. **Enter** your name, **select** difficulty, and **Start**.  
+3. **Place** track pieces:
+   - **Straight**: only horizontal/vertical on bridges  
+   - **Curve**: only on curved segments  
+   - **Rotate**: click a placed piece to rotate 90°  
+   - **Empty/Oasis**: cannot place on oasis  
+4. **Solve** when all grid cells are connected in one continuous loop.  
+5. Upon completion, your **time** is recorded and shown on the **leaderboard**.
+
+---
+
+## ⚙️ Folder Structure
+
+```
+/
+├── css/
+│   └── style.css
+├── js/
+│   └── app.js
+├── pics/
+│   └── buttons
+│   └── levels
+│   └── railway-gameplay.png
+│   └── screens
+│   └── tiles
+├── index.html
+└── README.md
+```
+
+---
+
+## 🛠 Technologies
+
+- **HTML5** & **CSS3** for layout & styling  
+- **Vanilla JavaScript** for game logic & UI interaction  
+- **LocalStorage** for saving game state & leaderboards  
+
+---
+
+## 🚀 Running Locally
+
+No server needed—just open in any modern browser:
+
+```bash
+http-server
+```
+
+---
+
+## 🤝 Contributing
+
+Suggestions or improvements welcome. Fork the repo, submit a PR, and we’ll review!
+
+---
+
+## 📄 License
+
+MIT License © 2025 Rauf 
